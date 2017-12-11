@@ -5,6 +5,7 @@
  */
 public class Array {
     int[] array;
+    SearchResult searchResult;
     public Array(int length,int[] arr) {
         array = new int[length];
         for(int i=0;i<arr.length;i++) {
@@ -22,13 +23,19 @@ public class Array {
     // public Type delete() {
         
     // }
-    public boolean search(int key) {
-        for(int i:array) {
-            if (i==key) {
-                return true;   
+    public SearchResult search(int key) {
+        searchResult = new SearchResult();
+        for(int i=0;i<array.length;i++) {
+            if (array[i]==key) {
+                   searchResult.value = array[i];
+                   searchResult.isValue = true;
+                   searchResult.position = i+1;
+                   return searchResult;
             } 
         }
-        return false;
+        searchResult.value = key;
+        searchResult.isValue = false;
+        return searchResult;
     }
     // public Type update() {
         
@@ -53,5 +60,22 @@ public class Array {
        System.out.println(obj.search(6));
        int[] arr2 = {5,4,6,8};
        System.out.println(Array.search(arr2,1)); 
+    }
+}
+
+/**
+ * SearchResult
+ */
+class SearchResult {
+
+    int value;
+    boolean isValue;
+    int position;
+    public String toString() {
+        if (this.isValue) {
+            return this.value+" is found at "+this.position+"th position.";
+        } else {
+            return this.value+" not found!";
+        }
     }
 }
