@@ -17,11 +17,20 @@ public class Array {
             System.out.println(i);
         }
     }
-    // public Type insert() {
-        
-    // }
+    public void insert(int value,int position) {
+        position--;
+        int[] tempArray = new int[array.length+1];
+        for(int i=0;i<array.length;i++) {
+            tempArray[i] = array[i];
+        }
+          for (int i = (tempArray.length-2);i>=position ;i-- ) {
+            tempArray[i+1] = tempArray[i];
+          }
+          tempArray[position] = value;
+          array = tempArray;
+    }
     // public Type delete() {
-        
+
     // }
     public SearchResult search(int key) {
         searchResult = new SearchResult();
@@ -31,14 +40,14 @@ public class Array {
                    searchResult.isValue = true;
                    searchResult.position = i+1;
                    return searchResult;
-            } 
+            }
         }
         searchResult.value = key;
         searchResult.isValue = false;
         return searchResult;
     }
     // public Type update() {
-        
+
     // }
     public static void traverse(int[] array) {
         for(int i:array) {
@@ -48,8 +57,8 @@ public class Array {
     public static boolean search(int[] array,int key) {
         for(int i:array) {
             if (i==key) {
-                return true;   
-            } 
+                return true;
+            }
         }
         return false;
     }
@@ -59,7 +68,10 @@ public class Array {
        System.out.println(obj.search(5));
        System.out.println(obj.search(6));
        int[] arr2 = {5,4,6,8};
-       System.out.println(Array.search(arr2,1)); 
+       System.out.println(Array.search(arr2,1));
+
+       obj.insert(111,3);
+       obj.traverse();
     }
 }
 
