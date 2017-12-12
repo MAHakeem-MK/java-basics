@@ -14,8 +14,9 @@ public class Array {
     }
     public void traverse() {
         for(int i:array) {
-            System.out.println(i);
+            System.out.print(i+" ");
         }
+        System.out.println("\n");
     }
 
     public void insert(int value,int position) {
@@ -36,9 +37,17 @@ public class Array {
       array[position] = value;
     }
 
-    // public Type delete() {
-
-    // }
+    public void delete(int position) {
+      position--;
+      for (int i = position;i<(array.length-1) ;i++ ) {
+        array[i] = array[i+1];
+      }
+      int[] tempArray = new int[array.length-1];
+      for(int i=0;i<tempArray.length;i++) {
+          tempArray[i] = array[i];
+      }
+      array = tempArray;
+    }
 
     public SearchResult search(int key) {
         searchResult = new SearchResult();
@@ -80,6 +89,8 @@ public class Array {
 
        obj.insert(111,3);
        obj.update(112,4);
+       obj.traverse();
+       obj.delete(5);
        obj.traverse();
     }
 }
