@@ -17,6 +17,7 @@ public class Array {
             System.out.println(i);
         }
     }
+
     public void insert(int value,int position) {
         position--;
         int[] tempArray = new int[array.length+1];
@@ -29,9 +30,16 @@ public class Array {
           tempArray[position] = value;
           array = tempArray;
     }
+
+    public void update(int value,int position) {
+      position--;
+      array[position] = value;
+    }
+
     // public Type delete() {
 
     // }
+
     public SearchResult search(int key) {
         searchResult = new SearchResult();
         for(int i=0;i<array.length;i++) {
@@ -46,14 +54,13 @@ public class Array {
         searchResult.isValue = false;
         return searchResult;
     }
-    // public Type update() {
 
-    // }
     public static void traverse(int[] array) {
         for(int i:array) {
             System.out.println(i);
         }
     }
+
     public static boolean search(int[] array,int key) {
         for(int i:array) {
             if (i==key) {
@@ -62,6 +69,7 @@ public class Array {
         }
         return false;
     }
+
     public static void main(String[] args) {
         int[] array = {1,4,3,6,2,8,2};
         Array obj = new Array(array.length,array);
@@ -71,6 +79,7 @@ public class Array {
        System.out.println(Array.search(arr2,1));
 
        obj.insert(111,3);
+       obj.update(112,4);
        obj.traverse();
     }
 }
