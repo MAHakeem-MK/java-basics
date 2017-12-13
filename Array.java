@@ -3,6 +3,8 @@
  * Author : M A Hakeem MK
  * Date : 10/12/2017
  */
+import java.util.Scanner;
+
 public class Array {
     int[] array;
     SearchResult searchResult;
@@ -78,20 +80,18 @@ public class Array {
         }
         return false;
     }
-
     public static void main(String[] args) {
-        int[] array = {1,4,3,6,2,8,2};
-        Array obj = new Array(array.length,array);
-       System.out.println(obj.search(5));
-       System.out.println(obj.search(6));
-       int[] arr2 = {5,4,6,8};
-       System.out.println(Array.search(arr2,1));
-
-       obj.insert(111,3);
-       obj.update(112,4);
-       obj.traverse();
-       obj.delete(5);
-       obj.traverse();
+        int selection;
+        Menu menu = new Menu();
+        Scanner sc = new Scanner(System.in);
+        do{
+            System.out.println("************************************");
+            menu.display();
+            System.out.println("************************************");
+            System.out.println("**enter 0 to quit");
+            selection = sc.nextInt();
+            menu.onSelect(selection);
+        }while(selection!=0);
     }
 }
 
@@ -105,9 +105,125 @@ class SearchResult {
     int position;
     public String toString() {
         if (this.isValue) {
-            return this.value+" is found at "+this.position+"th position.";
+            return this.value+" is found at "+"position "+this.position;
         } else {
             return this.value+" not found!";
+        }
+    }
+}
+/**
+ * Menu
+ */
+class Menu {
+
+    final String menu1 = "1 : Create Array";
+    final String menu2 = "2 : Traverse Array";
+    final String menu3 = "3 : Insert value to Array";
+    final String menu4 = "4 : Update value of Array"; 
+    final String menu5 = "5 : Delete value from Array";
+    final String menu6 = "6 : Search";
+
+    Scanner scan = new Scanner(System.in);
+    Array array;
+    
+    public void display() {
+        System.out.println(menu1);
+        System.out.println(menu2);
+        System.out.println(menu3);
+        System.out.println(menu4);
+        System.out.println(menu5);
+        System.out.println(menu6);
+    }
+    public void onSelect(int key) {
+        switch (key) {
+            case 0 :
+                break;
+            case 1 : 
+                    createArray();
+                break;
+            case 2 :
+                    traverse();
+                break;
+            case 3 :
+                    insert();
+                break;
+            case 4 :
+                    update();
+                break;
+            case 5 :
+                    delete();
+                break;
+            case 6 :
+                    search();
+                break;
+            default:
+                    System.out.println("Enter a valid key!");
+                break;
+        }
+    }
+    public void createArray() {
+        int size;
+        int[] tempArray;
+        System.out.print("Enter size of array:");
+        size = scan.nextInt();
+        tempArray = new int[size];
+        System.out.println("Enter values of array");
+        for(int i=0;i<tempArray.length;i++) {
+            tempArray[i] = scan.nextInt();
+        }
+        array = new Array(size,tempArray);
+    }
+    public void traverse() {
+        if(array!=null) {
+            array.traverse();
+        } else {
+            System.out.println("array is not available,please create one!");
+        }
+    }
+    public void insert() {
+        int position;
+        int value;
+        if(array!=null) {
+            System.out.print("Enter the position the value to be inserted:");
+            position = scan.nextInt();
+            System.out.print("Enter the value to be inserted:");
+            value = scan.nextInt();
+            array.insert(value,position);
+        } else {
+            System.out.println("array is not available,please create one!");
+        }
+    }
+    public void update() {
+        int position;
+        int value;
+        if(array!=null) {
+            System.out.print("Enter the position of value to be updated:");
+            position = scan.nextInt();
+            System.out.print("Enter value:");
+            value = scan.nextInt();
+            array.update(value,position);
+        } else {
+            System.out.println("array is not available,please create one!");
+        }
+    }
+    public void delete() {
+        int position;
+        if(array!=null) {
+            System.out.print("Enter position of value to be deleted:");
+            position = scan.nextInt();
+            array.delete(position);
+        } else {
+            System.out.println("array is not available,please create one!");
+        }
+    }
+    public void search() {
+        int key;
+        if(array!=null) {
+            System.out.print("Enter the value to be searched:");
+            key = scan.nextInt();
+            System.out.println(array.search(key)); 
+        } else {
+            System.out.println("array is not available,please create one!");
         }
     }
 }
